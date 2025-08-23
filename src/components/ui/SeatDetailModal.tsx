@@ -66,6 +66,19 @@ const getShiftLabel = (type: string): string => {
   }
 };
 
+const getStatusColor = (status: string): string => {
+  switch (status) {
+    case 'booked':
+      return '#10B981'; // Green
+    case 'available':
+      return '#6B7280'; // Grey
+    case 'unavailable':
+      return '#EF4444'; // Red
+    default:
+      return '#6B7280';
+  }
+};
+
 export default function SeatDetailModal({
   visible,
   onClose,
@@ -102,7 +115,27 @@ export default function SeatDetailModal({
     >
       <View style={styles.overlay}>
         <View style={styles.modal}>
-          {/* Header */}
+          {/* Seat Navigation Header */}
+          <View style={styles.seatNavigationHeader}>
+            <View style={styles.seatNavigationButtons}>
+              <TouchableOpacity style={styles.seatNavButton}>
+                <Text style={styles.seatNavText}>A-1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.seatNavButton}>
+                <Text style={styles.seatNavText}>A-1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.seatNavButton}>
+                <Text style={styles.seatNavText}>A-1</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.seatNavButton, styles.activeSeatNavButton]}
+              >
+                <Text style={styles.seatNavText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Main Header */}
           <View style={styles.header}>
             <View style={styles.seatInfo}>
               <Text style={styles.seatNumber}>
@@ -120,17 +153,13 @@ export default function SeatDetailModal({
             </View>
           </View>
 
-          {/* Close Button */}
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text style={styles.closeButtonText}>✕</Text>
-          </TouchableOpacity>
-
           {/* Content */}
           <ScrollView
             style={styles.content}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentContainer}
           >
-            {seatDetail.shifts.map((shift) => (
+            {seatDetail.shifts.map((shift, index) => (
               <View key={shift.id} style={styles.shiftCard}>
                 <View style={styles.shiftHeader}>
                   <View
@@ -143,14 +172,25 @@ export default function SeatDetailModal({
                       {getShiftLabel(shift.type)}
                     </Text>
                   </View>
-                  <Text style={styles.shiftStatus}>{shift.status}</Text>
+                  <Text
+                    style={[
+                      styles.shiftStatus,
+                      { color: getStatusColor(shift.status) },
+                    ]}
+                  >
+                    {shift.status === 'booked'
+                      ? 'Booked'
+                      : shift.status === 'available'
+                        ? 'Available'
+                        : 'Unavailable'}
+                  </Text>
                 </View>
 
                 <View style={styles.studentInfo}>
                   <Text style={styles.studentName}>{shift.studentName}</Text>
                   {shift.subscriptionEnded && (
                     <View style={styles.subscriptionWarning}>
-                      <Text style={styles.warningIcon}>👤</Text>
+                      <Text style={styles.warningIcon}>🔔</Text>
                       <Text style={styles.warningText}>
                         {shift.studentName} subscription is ended.
                       </Text>
@@ -180,26 +220,42 @@ export default function SeatDetailModal({
                 </View>
 
                 {/* Action Buttons */}
-                {shift.status === 'booked' && shift.subscriptionEnded && (
-                  <TouchableOpacity
-                    style={styles.renewButton}
-                    onPress={() => onRenewSubscription(shift.id)}
-                  >
-                    <Text style={styles.renewButtonText}>Renew</Text>
-                  </TouchableOpacity>
-                )}
+                <View style={styles.actionButtonsContainer}>
+                  {shift.status === 'booked' && shift.subscriptionEnded && (
+                    <TouchableOpacity
+                      style={styles.renewButton}
+                      onPress={() => onRenewSubscription(shift.id)}
+                    >
+                      <Text style={styles.renewButtonText}>Renew</Text>
+                    </TouchableOpacity>
+                  )}
 
-                {shift.status === 'available' && (
-                  <TouchableOpacity
-                    style={styles.addStudentButton}
-                    onPress={() => onAddStudent(shift.type)}
-                  >
-                    <Text style={styles.addStudentButtonText}>Add student</Text>
-                  </TouchableOpacity>
+                  {shift.status === 'available' && (
+                    <TouchableOpacity
+                      style={styles.addStudentButton}
+                      onPress={() => onAddStudent(shift.type)}
+                    >
+                      <Text style={styles.addStudentButtonText}>
+                        Add student
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+
+                {/* Full Day Shift special case */}
+                {shift.type === 'fullDay' && shift.status === 'unavailable' && (
+                  <View style={styles.fullDayUnavailable}>
+                    <Text style={styles.fullDayDash}>---</Text>
+                  </View>
                 )}
               </View>
             ))}
           </ScrollView>
+
+          {/* Close Button */}
+          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+            <Text style={styles.closeButtonText}>✕</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -217,9 +273,47 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    maxHeight: '90%',
+    maxHeight: '80%',
+    minHeight: '60%',
     width: '100%',
     padding: 20,
+    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -4,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 10,
+  },
+  seatNavigationHeader: {
+    marginBottom: 20,
+    paddingTop: 10,
+  },
+  seatNavigationButtons: {
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'flex-start',
+  },
+  seatNavButton: {
+    width: 50,
+    height: 40,
+    borderRadius: 8,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  activeSeatNavButton: {
+    backgroundColor: '#FEF3C7',
+    borderColor: '#F59E0B',
+  },
+  seatNavText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: Colors.text,
   },
   header: {
     flexDirection: 'row',
@@ -275,20 +369,34 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    minHeight: 300,
+  },
+  contentContainer: {
+    paddingBottom: 40,
+    flexGrow: 1,
   },
   shiftCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    padding: 16,
+    padding: 20,
     marginBottom: 16,
     borderWidth: 1,
     borderColor: '#E5E7EB',
+    borderStyle: 'dashed',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
   },
   shiftHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   shiftTypeBadge: {
     paddingHorizontal: 12,
@@ -302,7 +410,7 @@ const styles = StyleSheet.create({
   },
   shiftStatus: {
     fontSize: 14,
-    color: Colors.textSecondary,
+    fontWeight: '600',
     textTransform: 'capitalize',
   },
   studentInfo: {
@@ -318,6 +426,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
+    marginTop: 4,
   },
   warningIcon: {
     fontSize: 14,
@@ -330,18 +439,20 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     gap: 8,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     marginBottom: 12,
   },
   actionButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     backgroundColor: '#F3F4F6',
     justifyContent: 'center',
     alignItems: 'center',
   },
   actionIcon: {
-    fontSize: 14,
+    fontSize: 16,
   },
   renewButton: {
     backgroundColor: Colors.primary,
@@ -365,6 +476,17 @@ const styles = StyleSheet.create({
   addStudentButtonText: {
     color: '#FFFFFF',
     fontSize: 14,
+    fontWeight: '600',
+  },
+  actionButtonsContainer: {
+    alignItems: 'flex-end',
+  },
+  fullDayUnavailable: {
+    marginTop: 8,
+  },
+  fullDayDash: {
+    fontSize: 16,
+    color: Colors.textSecondary,
     fontWeight: '600',
   },
 });

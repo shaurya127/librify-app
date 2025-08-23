@@ -119,10 +119,88 @@ const mockSeats = [
     status: 'available' as SeatStatus,
     hasNotification: false,
   },
-  // Add A-29 as shown in your image
+  // Add more A section seats to match the design
+  {
+    id: 'A-17',
+    number: 'A-17',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-18',
+    number: 'A-18',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-19',
+    number: 'A-19',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-20',
+    number: 'A-20',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-21',
+    number: 'A-21',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-22',
+    number: 'A-22',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-23',
+    number: 'A-23',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-24',
+    number: 'A-24',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-25',
+    number: 'A-25',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-26',
+    number: 'A-26',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-27',
+    number: 'A-27',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-28',
+    number: 'A-28',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
   {
     id: 'A-29',
     number: 'A-29',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'A-30',
+    number: 'A-30',
     status: 'available' as SeatStatus,
     hasNotification: false,
   },
@@ -155,6 +233,24 @@ const mockSeats = [
   {
     id: 'B-5',
     number: 'B-5',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'B-6',
+    number: 'B-6',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'B-7',
+    number: 'B-7',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
+  {
+    id: 'B-8',
+    number: 'B-8',
     status: 'available' as SeatStatus,
     hasNotification: false,
   },
@@ -202,6 +298,12 @@ const mockSeats = [
     status: 'available' as SeatStatus,
     hasNotification: false,
   },
+  {
+    id: 'C-8',
+    number: 'C-8',
+    status: 'available' as SeatStatus,
+    hasNotification: false,
+  },
 ];
 
 // Enhanced mock data with details for ALL seats
@@ -238,16 +340,16 @@ const mockSeatDetails: Record<string, SeatDetail> = {
       },
     ],
   },
-  'A-4': {
-    seatNumber: 'A-4',
+  'A-2': {
+    seatNumber: 'A-2',
     floor: 'A',
     date: 'Seat status - 22 Aug 2025',
     shifts: [
       {
         id: 'shift-5',
         type: 'morning',
-        status: 'booked',
-        studentName: 'John Doe',
+        status: 'available',
+        studentName: 'Name-',
       },
       {
         id: 'shift-6',
@@ -263,6 +365,812 @@ const mockSeatDetails: Record<string, SeatDetail> = {
       },
       {
         id: 'shift-8',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-3': {
+    seatNumber: 'A-3',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-9',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-10',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-11',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-12',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-4': {
+    seatNumber: 'A-4',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-13',
+        type: 'morning',
+        status: 'booked',
+        studentName: 'John Doe',
+      },
+      {
+        id: 'shift-14',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-15',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-16',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-5': {
+    seatNumber: 'A-5',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-17',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-18',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-19',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-20',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-6': {
+    seatNumber: 'A-6',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-21',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-22',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-23',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-24',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-7': {
+    seatNumber: 'A-7',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-25',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-26',
+        type: 'evening',
+        status: 'booked',
+        studentName: 'Sarah Wilson',
+      },
+      {
+        id: 'shift-27',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-28',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-8': {
+    seatNumber: 'A-8',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-29',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-30',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-31',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-32',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-9': {
+    seatNumber: 'A-9',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-33',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-34',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-35',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-36',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-10': {
+    seatNumber: 'A-10',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-37',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-38',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-39',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-40',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-11': {
+    seatNumber: 'A-11',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-41',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-42',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-43',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-44',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-12': {
+    seatNumber: 'A-12',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-45',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-46',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-47',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-48',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-13': {
+    seatNumber: 'A-13',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-49',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-50',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-51',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-52',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-14': {
+    seatNumber: 'A-14',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-53',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-54',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-55',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-56',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-15': {
+    seatNumber: 'A-15',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-57',
+        type: 'morning',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-58',
+        type: 'evening',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-59',
+        type: 'night',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-60',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-16': {
+    seatNumber: 'A-16',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-61',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-62',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-63',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-64',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-17': {
+    seatNumber: 'A-17',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-65',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-66',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-67',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-68',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-18': {
+    seatNumber: 'A-18',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-69',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-70',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-71',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-72',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-19': {
+    seatNumber: 'A-19',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-73',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-74',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-75',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-76',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-20': {
+    seatNumber: 'A-20',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-77',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-78',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-79',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-80',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-21': {
+    seatNumber: 'A-21',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-81',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-82',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-83',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-84',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-22': {
+    seatNumber: 'A-22',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-85',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-86',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-87',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-88',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-23': {
+    seatNumber: 'A-23',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-89',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-90',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-91',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-92',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-24': {
+    seatNumber: 'A-24',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-93',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-94',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-95',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-96',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-25': {
+    seatNumber: 'A-25',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-97',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-98',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-99',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-100',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-26': {
+    seatNumber: 'A-26',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-101',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-102',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-103',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-104',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-27': {
+    seatNumber: 'A-27',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-105',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-106',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-107',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-108',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-28': {
+    seatNumber: 'A-28',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-109',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-110',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-111',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-112',
         type: 'fullDay',
         status: 'unavailable',
         studentName: 'Name-',
@@ -295,6 +1203,535 @@ const mockSeatDetails: Record<string, SeatDetail> = {
       },
       {
         id: 'shift-29-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'A-30': {
+    seatNumber: 'A-30',
+    floor: 'A',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-113',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-114',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-115',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-116',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  // Section B seats
+  'B-1': {
+    seatNumber: 'B-1',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b1-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b1-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b1-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b1-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-2': {
+    seatNumber: 'B-2',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b2-1',
+        type: 'morning',
+        status: 'booked',
+        studentName: 'Mike Johnson',
+      },
+      {
+        id: 'shift-b2-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b2-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b2-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-3': {
+    seatNumber: 'B-3',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b3-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b3-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b3-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b3-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-4': {
+    seatNumber: 'B-4',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b4-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b4-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b4-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b4-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-5': {
+    seatNumber: 'B-5',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b5-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b5-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b5-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b5-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-6': {
+    seatNumber: 'B-6',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b6-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b6-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b6-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b6-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-7': {
+    seatNumber: 'B-7',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b7-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b7-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b7-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b7-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'B-8': {
+    seatNumber: 'B-8',
+    floor: 'B',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-b8-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b8-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b8-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-b8-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  // Section C seats
+  'C-1': {
+    seatNumber: 'C-1',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c1-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c1-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c1-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c1-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-2': {
+    seatNumber: 'C-2',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c2-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c2-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c2-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c2-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-3': {
+    seatNumber: 'C-3',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c3-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c3-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c3-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c3-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-4': {
+    seatNumber: 'C-4',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c4-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c4-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c4-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c4-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-5': {
+    seatNumber: 'C-5',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c5-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c5-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c5-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c5-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-6': {
+    seatNumber: 'C-6',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c6-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c6-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c6-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c6-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-7': {
+    seatNumber: 'C-7',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c7-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c7-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c7-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c7-4',
+        type: 'fullDay',
+        status: 'unavailable',
+        studentName: 'Name-',
+      },
+    ],
+  },
+  'C-8': {
+    seatNumber: 'C-8',
+    floor: 'C',
+    date: 'Seat status - 22 Aug 2025',
+    shifts: [
+      {
+        id: 'shift-c8-1',
+        type: 'morning',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c8-2',
+        type: 'evening',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c8-3',
+        type: 'night',
+        status: 'available',
+        studentName: 'Name-',
+      },
+      {
+        id: 'shift-c8-4',
         type: 'fullDay',
         status: 'unavailable',
         studentName: 'Name-',
@@ -394,6 +1831,7 @@ export default function SeatmapScreen() {
   };
 
   const getSeatDetail = (seatNumber: string): SeatDetail => {
+    // First check if we have specific data for this seat
     if (mockSeatDetails[seatNumber]) {
       return mockSeatDetails[seatNumber];
     }
@@ -738,7 +2176,6 @@ const styles = StyleSheet.create({
   seatContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    gap: 4,
+    justifyContent: 'space-between',
   },
 });
