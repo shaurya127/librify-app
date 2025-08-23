@@ -8,3 +8,5 @@ export { PhoneInput } from './PhoneInput';
 export { SecureIcon } from './SecureIcon';
 export { default as TabBarBackground } from './TabBarBackground';
 export { default as TabBarBackgroundIOS } from './TabBarBackground.ios';
+export { default as DonutChart } from './DonutChart';
+export { default as ActionModals } from './ActionModals';

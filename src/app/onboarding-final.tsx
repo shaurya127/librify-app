@@ -12,11 +12,21 @@ import { Colors } from '@/constants/Colors';
 
 interface OnboardingFinalProps {
   onComplete: () => void;
+  navigation?: any;
 }
 
 export default function OnboardingFinalScreen({
   onComplete,
+  navigation,
 }: OnboardingFinalProps) {
+  const handleGoToDashboard = () => {
+    if (navigation) {
+      navigation.navigate('dashboard-home');
+    } else {
+      onComplete();
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -50,6 +60,22 @@ export default function OnboardingFinalScreen({
                 <Ionicons name="play" size={24} color="#FFFFFF" />
               </View>
             </View>
+          </View>
+
+          <View style={styles.separator} />
+
+          {/* Dashboard CTA Section */}
+          <View style={styles.dashboardSection}>
+            <Text style={styles.dashboardText}>
+              Ready to explore your library management system?
+            </Text>
+            <TouchableOpacity
+              style={styles.dashboardButton}
+              onPress={handleGoToDashboard}
+            >
+              <Ionicons name="grid" size={20} color="#FFFFFF" />
+              <Text style={styles.dashboardButtonText}>Go to Dashboard</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.separator} />
@@ -175,6 +201,40 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  dashboardSection: {
+    alignItems: 'center',
+    marginBottom: 24,
+    width: '100%',
+  },
+  dashboardText: {
+    fontSize: 16,
+    color: '#374151',
+    marginBottom: 20,
+    textAlign: 'center',
+    fontWeight: '500',
+  },
+  dashboardButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.primary,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    gap: 12,
+    shadowColor: Colors.primary,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  dashboardButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
   emergencySection: {
     alignItems: 'center',
