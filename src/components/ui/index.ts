@@ -10,3 +10,6 @@ export { default as TabBarBackground } from './TabBarBackground';
 export { default as TabBarBackgroundIOS } from './TabBarBackground.ios';
 export { default as DonutChart } from './DonutChart';
 export { default as ActionModals } from './ActionModals';
+export { default as Seat } from './Seat';
+export { default as FilterModal } from './FilterModal';
+export { default as SeatDetailModal } from './SeatDetailModal';
