@@ -37,11 +37,19 @@ export default function RootLayout() {
     const inAuthGroup = segments[0] === 'auth';
     const inDashboardGroup = segments[0] === '(dashboard)';
 
-    if (isAuthenticated && !inDashboardGroup) {
-      // User is authenticated but not in dashboard, redirect to dashboard
+    // Define additional authenticated routes that don't require dashboard group
+    const additionalAuthenticatedRoutes = [
+      'new-student-requests',
+      'upcoming-subscription-end',
+      'all-transactions',
+    ];
+    const isInAdditionalRoute = additionalAuthenticatedRoutes.includes(
+      segments[0]
+    );
+
+    if (isAuthenticated && !inDashboardGroup && !isInAdditionalRoute) {
       router.replace('/(dashboard)');
-    } else if (!isAuthenticated && inDashboardGroup) {
-      // User is not authenticated but trying to access dashboard, redirect to auth
+    } else if (!isAuthenticated && (inDashboardGroup || isInAdditionalRoute)) {
       router.replace('/auth');
     }
   }, [isAuthenticated, segments, loaded, router]);
@@ -56,6 +64,18 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
         <Stack.Screen name="auth" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="new-student-requests"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="upcoming-subscription-end"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="all-transactions"
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

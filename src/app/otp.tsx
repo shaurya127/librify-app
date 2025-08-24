@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
+  ImageBackground,
 } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -80,15 +81,18 @@ export default function OtpScreen({ onVerify, onBack }: OtpInputProps) {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
     >
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.patternBackground} />
+        {/* Header Section with ImageBackground covering back button and status bar area */}
+        <ImageBackground
+          source={require('@/assets/images/background.png')}
+          style={styles.headerBackground}
+          resizeMode="cover"
+        >
+          <View style={styles.header}>
+            <TouchableOpacity onPress={onBack} style={styles.backButton}>
+              <Ionicons name="arrow-back" size={24} color={Colors.text} />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.header}>
-          <TouchableOpacity onPress={onBack} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={Colors.text} />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.content}>
           <View style={styles.logoSection}>
             <View style={styles.logoContainer}>
               <Image
@@ -99,7 +103,9 @@ export default function OtpScreen({ onVerify, onBack }: OtpInputProps) {
             </View>
             <Text style={styles.welcomeText}>Welcome Back 👋</Text>
           </View>
+        </ImageBackground>
 
+        <View style={styles.content}>
           <View style={styles.otpSection}>
             <OtpInput
               otp={otp}
@@ -109,6 +115,8 @@ export default function OtpScreen({ onVerify, onBack }: OtpInputProps) {
               handleKeyPress={handleKeyPress}
               inputRefs={inputRefs}
               error={error}
+              onResend={handleResend}
+              resendTimer={resendTimer}
             />
           </View>
 
@@ -144,33 +152,27 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  patternBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '30%',
-    backgroundColor: Colors.backgroundPattern,
-    opacity: 0.3,
+  headerBackground: {
+    paddingTop: 60,
+    paddingHorizontal: 24,
+    paddingBottom: 32,
+    position: 'relative',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginTop: 20,
+    marginBottom: 20,
   },
   backButton: {
-    padding: 8,
+    padding: 4,
+    marginBottom: 20,
   },
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 20,
   },
   logoSection: {
     alignItems: 'flex-start',
-    marginBottom: 40,
   },
   logoContainer: {
     flexDirection: 'row',
@@ -189,22 +191,7 @@ const styles = StyleSheet.create({
   },
   otpSection: {
     marginBottom: 24,
-  },
-  resendContainer: {
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-  resendText: {
-    fontSize: 14,
-    color: Colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-  resendLink: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: Colors.primary,
-    textDecorationLine: 'underline',
+    marginTop: 0,
   },
   button: {
     marginBottom: 40,
@@ -225,18 +212,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textSecondary,
     textAlign: 'center',
-  },
-  testButton: {
-    backgroundColor: Colors.primaryLight,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  testButtonText: {
-    color: Colors.primary,
-    fontSize: 14,
-    fontWeight: '500',
   },
 });

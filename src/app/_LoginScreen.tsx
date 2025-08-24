@@ -50,22 +50,22 @@ export default function LoginScreen({ onContinueWithPhone }: LoginProps) {
   };
 
   return (
-    <ImageBackground
-      source={require('@/assets/images/background.png')}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <SafeAreaView style={styles.container}>
-        {/* Error Banner */}
-        <ErrorBanner
-          message={systemError}
-          onDismiss={dismissSystemError}
-          visible={!!systemError}
-        />
+    <SafeAreaView style={styles.container}>
+      {/* Error Banner */}
+      <ErrorBanner
+        message={systemError}
+        onDismiss={dismissSystemError}
+        visible={!!systemError}
+      />
 
-        {/* Main Content */}
-        <View style={styles.content}>
-          {/* Header Section */}
+      {/* Main Content */}
+      <View style={styles.content}>
+        {/* Combined Header and Form Section with ImageBackground */}
+        <ImageBackground
+          source={require('@/assets/images/background.png')}
+          style={styles.headerBackground}
+          resizeMode="cover"
+        >
           <View style={styles.headerSection}>
             {/* Logo */}
             <View style={styles.logoContainer}>
@@ -78,8 +78,10 @@ export default function LoginScreen({ onContinueWithPhone }: LoginProps) {
 
             {/* Welcome Text */}
             <Text style={styles.welcomeText}>Welcome Back 👋</Text>
+          </View>
 
-            {/* Phone Input */}
+          {/* Phone Input and Button - now inside the ImageBackground */}
+          <View style={styles.formSection}>
             <PhoneInput
               value={phoneNumber}
               onChangeText={setPhoneNumber}
@@ -96,47 +98,44 @@ export default function LoginScreen({ onContinueWithPhone }: LoginProps) {
               style={styles.button}
             />
           </View>
+        </ImageBackground>
 
-          {/* Footer */}
-          <View style={styles.footer}>
-            <View style={styles.secureContainer}>
-              <Image
-                source={require('@/assets/images/lockicon.png')}
-                style={styles.lockIcon}
-                resizeMode="contain"
-              />
-            </View>
-            <Text style={styles.secureText}>Fast, secure and easy to use</Text>
+        {/* Footer */}
+        <View style={styles.footer}>
+          <View style={styles.secureContainer}>
+            <Image
+              source={require('@/assets/images/lockicon.png')}
+              style={styles.lockIcon}
+              resizeMode="contain"
+            />
           </View>
+          <Text style={styles.secureText}>Fast, secure and easy to use</Text>
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   container: {
     flex: 1,
+    backgroundColor: Colors.background,
   },
   content: {
     flex: 1,
-    justifyContent: 'space-between',
+  },
+  headerBackground: {
+    paddingTop: 180,
     paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 40,
+    paddingBottom: 32,
+    position: 'relative',
   },
   headerSection: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'stretch', // Changed from 'center' to 'stretch' for better alignment
-    marginTop: -60,
+    alignItems: 'flex-start',
   },
   logoContainer: {
-    marginBottom: 32,
-    alignItems: 'flex-start', // Changed to align logo to the left
+    marginBottom: 8,
+    alignItems: 'flex-start',
   },
   logo: {
     width: 120,
@@ -146,15 +145,21 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     color: Colors.text,
-    textAlign: 'left', // Changed from 'center' to 'left'
-    marginBottom: 32,
+    textAlign: 'left',
+  },
+  formSection: {
+    marginTop: 20,
   },
   button: {
-    marginTop: 16, // Increased margin for better spacing
+    marginTop: 16,
     width: '100%',
   },
   footer: {
     alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   secureContainer: {
     marginBottom: 12,

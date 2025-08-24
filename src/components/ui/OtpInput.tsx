@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, KeyboardType, Text } from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  KeyboardType,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { Colors } from '@/constants/Colors';
 
 interface OtpInputProps {
@@ -10,6 +17,8 @@ interface OtpInputProps {
   handleKeyPress: (e: any, index: number) => void;
   inputRefs: React.MutableRefObject<(TextInput | null)[]>;
   error?: string;
+  onResend: () => void;
+  resendTimer: number;
 }
 
 export const OtpInput: React.FC<OtpInputProps> = ({
@@ -20,6 +29,8 @@ export const OtpInput: React.FC<OtpInputProps> = ({
   handleKeyPress,
   inputRefs,
   error,
+  onResend,
+  resendTimer,
 }) => {
   return (
     <View style={styles.container}>
@@ -56,10 +67,11 @@ export const OtpInput: React.FC<OtpInputProps> = ({
 
       {error && <Text style={styles.errorText}>{error}</Text>}
 
-      <Text style={styles.resendText}>
-        Didn't get a code?{' '}
-        <Text style={styles.resendLink}>Click to resend</Text>
-      </Text>
+      <View style={styles.resendContainer}>
+        <Text style={styles.resendText}>
+          Resent OTP {resendTimer > 0 ? resendTimer : ''}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -67,7 +79,7 @@ export const OtpInput: React.FC<OtpInputProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: 4,
   },
   label: {
     fontSize: 18,
@@ -116,13 +128,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: 'center',
   },
+  resendContainer: {
+    alignItems: 'flex-end',
+    marginBottom: 16,
+  },
   resendText: {
     fontSize: 14,
     color: Colors.textSecondary,
-    textAlign: 'center',
-  },
-  resendLink: {
-    color: Colors.primary,
-    fontWeight: '500',
   },
 });

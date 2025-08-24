@@ -133,9 +133,7 @@ export default function Sidebar({
         ]}
       >
         <View style={styles.branding}>
-          <Text style={styles.appName}>
-            Librify<Text style={styles.caret}>^</Text>
-          </Text>
+          <Text style={styles.appName}>Librify</Text>
         </View>
 
         <View style={styles.menuContainer}>
