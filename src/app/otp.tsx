@@ -30,6 +30,7 @@ export default function OtpScreen({ onVerify, onBack }: OtpInputProps) {
     handleOtpChange,
     handleKeyPress,
     focusInput,
+    autoFillOtp,
     isComplete,
   } = useOTPInput(onVerify);
 
@@ -103,24 +104,12 @@ export default function OtpScreen({ onVerify, onBack }: OtpInputProps) {
             <OtpInput
               otp={otp}
               otpLength={AUTH_CONFIG.OTP_LENGTH}
+              phoneNumber={currentPhone}
               handleOtpChange={handleOtpChange}
               handleKeyPress={handleKeyPress}
               inputRefs={inputRefs}
               error={error}
             />
-          </View>
-
-          <View style={styles.resendContainer}>
-            <Text style={styles.resendText}>
-              {resendTimer > 0
-                ? `Resent OTP ${resendTimer}`
-                : "Didn't get a code? Click to resend"}
-            </Text>
-            {resendTimer === 0 && (
-              <TouchableOpacity onPress={handleResend}>
-                <Text style={styles.resendLink}>Click to resend</Text>
-              </TouchableOpacity>
-            )}
           </View>
 
           <Button
@@ -236,5 +225,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textSecondary,
     textAlign: 'center',
+  },
+  testButton: {
+    backgroundColor: Colors.primaryLight,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  testButtonText: {
+    color: Colors.primary,
+    fontSize: 14,
+    fontWeight: '500',
   },
 });

@@ -14,12 +14,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import { DonutChart, ActionModals } from '@/components/ui';
 import { useAuthStore } from '@/store/auth-store';
-import { router } from 'expo-router';
+import { router, usePathname } from 'expo-router';
 import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
 
 const { width } = Dimensions.get('window');
 
-// Types
 interface Student {
   id: string;
   name: string;
@@ -39,7 +39,6 @@ interface RevenueData {
 type ActionType = 'payment' | 'request' | 'subscription';
 type ModalType = 'markAsPaid' | 'acceptStudent' | 'removeStudent';
 
-// Constants
 const PERIODS = [
   'Past 1 month',
   'Past 3 months',
@@ -52,7 +51,6 @@ const SUBSCRIPTION_TABS = [
   'Buffer days stu',
 ] as const;
 
-// Mock data (moved outside component to prevent recreation)
 const MOCK_DATA = {
   summaryData: {
     totalStudents: 324,
@@ -124,7 +122,6 @@ const MOCK_DATA = {
   })) as Student[],
 };
 
-// Component for reusable header with period selector
 const SectionHeader: React.FC<{
   title: string;
   showPeriodSelector?: boolean;
@@ -174,7 +171,6 @@ const SectionHeader: React.FC<{
   </View>
 );
 
-// Optimized Student Card Component
 const StudentCard: React.FC<{
   student: Student;
   showActions?: boolean;
@@ -262,7 +258,6 @@ const StudentCard: React.FC<{
   }
 );
 
-// Tab Component
 const TabSelector: React.FC<{
   tabs: readonly string[];
   selectedTab: string;
@@ -285,7 +280,6 @@ const TabSelector: React.FC<{
   </View>
 ));
 
-// Revenue Chart Component
 const RevenueChart: React.FC<{ data: RevenueData }> = React.memo(({ data }) => (
   <View style={styles.chartContainer}>
     <DonutChart data={data} size={120} strokeWidth={20} />
@@ -302,7 +296,6 @@ const RevenueChart: React.FC<{ data: RevenueData }> = React.memo(({ data }) => (
   </View>
 ));
 
-// Summary Card Component
 const SummaryCard: React.FC<{
   title: string;
   value: number;
@@ -317,16 +310,16 @@ const SummaryCard: React.FC<{
 
 export default function DashboardScreen() {
   const { user, logout } = useAuthStore();
+  const pathname = usePathname();
 
-  // State management
   const [selectedPeriod, setSelectedPeriod] = useState<string>('Past 1 month');
   const [selectedTab, setSelectedTab] = useState<string>('3 days left (12)');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<ModalType>('markAsPaid');
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-  // Filtered data based on search query
   const filteredPaymentDueStudents = useMemo(() => {
     if (!searchQuery.trim()) return MOCK_DATA.paymentDueStudents;
     const query = searchQuery.toLowerCase();
@@ -337,7 +330,6 @@ export default function DashboardScreen() {
     );
   }, [searchQuery]);
 
-  // Event handlers with useCallback for optimization
   const handleViewAllNewRequests = useCallback(() => {
     router.push('/new-student-requests');
   }, []);
@@ -375,7 +367,6 @@ export default function DashboardScreen() {
   }, []);
 
   const handleModalConfirm = useCallback(() => {
-    // Handle confirmation logic here
     closeModal();
   }, [closeModal]);
 
@@ -387,12 +378,20 @@ export default function DashboardScreen() {
     setSearchQuery(query);
   }, []);
 
+  const handleMorePress = useCallback(() => {
+    setIsSidebarVisible(true);
+  }, []);
+
+  const handleSidebarClose = useCallback(() => {
+    setIsSidebarVisible(false);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
 
       {/* Header */}
-      <Header />
+      <Header onMorePress={handleMorePress} />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Summary Section */}
@@ -539,6 +538,13 @@ export default function DashboardScreen() {
           onConfirm={handleModalConfirm}
         />
       )}
+
+      {/* Sidebar */}
+      <Sidebar
+        isVisible={isSidebarVisible}
+        onClose={handleSidebarClose}
+        currentRoute={pathname}
+      />
     </SafeAreaView>
   );
 }

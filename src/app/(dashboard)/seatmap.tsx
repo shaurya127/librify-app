@@ -12,7 +12,9 @@ import {
 } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
 import { Seat, FilterModal, SeatDetailModal } from '@/components/ui';
+import { usePathname } from 'expo-router';
 import { type FilterOptions } from '@/components/ui/FilterModal';
 import {
   type SeatDetail,
@@ -20,9 +22,7 @@ import {
 } from '@/components/ui/SeatDetailModal';
 import { type SeatStatus } from '@/components/ui/Seat';
 
-// Mock data for demonstration
 const mockSeats = [
-  // Section A - 4x4 grid
   {
     id: 'A-1',
     number: 'A-1',
@@ -119,7 +119,6 @@ const mockSeats = [
     status: 'available' as SeatStatus,
     hasNotification: false,
   },
-  // Add more A section seats to match the design
   {
     id: 'A-17',
     number: 'A-17',
@@ -205,7 +204,6 @@ const mockSeats = [
     hasNotification: false,
   },
 
-  // Section B - 2 rows
   {
     id: 'B-1',
     number: 'B-1',
@@ -255,7 +253,6 @@ const mockSeats = [
     hasNotification: false,
   },
 
-  // Section C - 2 rows
   {
     id: 'C-1',
     number: 'C-1',
@@ -306,7 +303,6 @@ const mockSeats = [
   },
 ];
 
-// Enhanced mock data with details for ALL seats
 const mockSeatDetails: Record<string, SeatDetail> = {
   'A-1': {
     seatNumber: 'A-1',
@@ -1240,7 +1236,6 @@ const mockSeatDetails: Record<string, SeatDetail> = {
       },
     ],
   },
-  // Section B seats
   'B-1': {
     seatNumber: 'B-1',
     floor: 'B',
@@ -1489,7 +1484,6 @@ const mockSeatDetails: Record<string, SeatDetail> = {
       },
     ],
   },
-  // Section C seats
   'C-1': {
     seatNumber: 'C-1',
     floor: 'C',
@@ -1738,7 +1732,6 @@ const mockSeatDetails: Record<string, SeatDetail> = {
       },
     ],
   },
-  // Default template for seats without specific data
   default: {
     seatNumber: '',
     floor: 'A',
@@ -1777,27 +1770,25 @@ export default function SeatmapScreen() {
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showSeatDetail, setShowSeatDetail] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [activeFilters, setActiveFilters] = useState<FilterOptions>({
     shiftType: 'all',
     studentType: 'all',
     date: '22 August 2025',
     floor: 'All floors',
   });
+  const pathname = usePathname();
 
   const filteredSeats = useMemo(() => {
     let filtered = mockSeats;
-
-    // Apply search filter
     if (searchQuery) {
       filtered = filtered.filter((seat) =>
         seat.number.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // Apply shift type filter
     if (activeFilters.shiftType !== 'all') {
       filtered = filtered.filter((seat) => {
-        // Map filter values to actual seat statuses
         switch (activeFilters.shiftType) {
           case 'morning':
             return seat.status === 'morning';
@@ -1815,7 +1806,6 @@ export default function SeatmapScreen() {
       });
     }
 
-    // Apply floor filter
     if (activeFilters.floor !== 'All floors') {
       const floorLetter = activeFilters.floor.replace('Floor ', '');
       filtered = filtered.filter((seat) => seat.number.startsWith(floorLetter));
@@ -1831,12 +1821,10 @@ export default function SeatmapScreen() {
   };
 
   const getSeatDetail = (seatNumber: string): SeatDetail => {
-    // First check if we have specific data for this seat
     if (mockSeatDetails[seatNumber]) {
       return mockSeatDetails[seatNumber];
     }
 
-    // Create dynamic seat detail for seats without specific data
     const floorLetter = seatNumber.charAt(0);
     return {
       ...mockSeatDetails.default,
@@ -1887,6 +1875,14 @@ export default function SeatmapScreen() {
     activeFilters.studentType !== 'all' ||
     activeFilters.floor !== 'All floors';
 
+  const handleMorePress = () => {
+    setIsSidebarVisible(true);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarVisible(false);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
@@ -1896,10 +1892,10 @@ export default function SeatmapScreen() {
         onAddUserPress={() => Alert.alert('Add User', 'Add user pressed')}
         onGridPress={() => Alert.alert('Grid', 'Grid pressed')}
         onAvatarPress={() => Alert.alert('Profile', 'Profile pressed')}
+        onMorePress={handleMorePress}
       />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Title and Export Button */}
         <View style={styles.titleRow}>
           <Text style={styles.title}>Seat management</Text>
           <TouchableOpacity style={styles.exportButton} onPress={handleExport}>
@@ -1964,8 +1960,6 @@ export default function SeatmapScreen() {
             )}
           </View>
         </View>
-
-        {/* Date Status and Filter Info */}
         <View style={styles.dateStatusRow}>
           <Text style={styles.dateStatus}>
             Seat status - {activeFilters.date}
@@ -1977,7 +1971,6 @@ export default function SeatmapScreen() {
           )}
         </View>
 
-        {/* Seat Grid */}
         <View style={styles.seatGrid}>
           <View style={styles.seatContainer}>
             {filteredSeats.map((seat) => (
@@ -1994,7 +1987,6 @@ export default function SeatmapScreen() {
         </View>
       </ScrollView>
 
-      {/* Filter Modal */}
       <FilterModal
         visible={showFilterModal}
         onClose={() => setShowFilterModal(false)}
@@ -2002,7 +1994,6 @@ export default function SeatmapScreen() {
         initialFilters={activeFilters}
       />
 
-      {/* Seat Detail Modal */}
       <SeatDetailModal
         visible={showSeatDetail}
         onClose={handleCloseModal}
@@ -2012,6 +2003,12 @@ export default function SeatmapScreen() {
         onDeleteBooking={handleDeleteBooking}
         onRenewSubscription={handleRenewSubscription}
         onAddStudent={handleAddStudent}
+      />
+
+      <Sidebar
+        isVisible={isSidebarVisible}
+        onClose={handleSidebarClose}
+        currentRoute={pathname}
       />
     </SafeAreaView>
   );

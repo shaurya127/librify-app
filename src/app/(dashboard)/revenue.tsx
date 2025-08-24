@@ -14,7 +14,8 @@ import Svg, { Path, Rect, Text as SvgText } from 'react-native-svg';
 import { Colors } from '@/constants/Colors';
 import Header from '@/components/Header';
 import TransactionCard from '@/components/TransactionCard';
-import { router } from 'expo-router';
+import Sidebar from '@/components/Sidebar';
+import { router, usePathname } from 'expo-router';
 
 const { width } = Dimensions.get('window');
 
@@ -99,6 +100,8 @@ export default function RevenueScreen() {
   const [selectedPeriod, setSelectedPeriod] = useState('Past 1 month');
   const [selectedTimeAggregation, setSelectedTimeAggregation] =
     useState('Month wise');
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const pathname = usePathname();
 
   const slices = useMemo(() => {
     const total =
@@ -143,6 +146,14 @@ export default function RevenueScreen() {
 
   const handleMenuPress = () => {
     // Handle menu press
+  };
+
+  const handleMorePress = () => {
+    setIsSidebarVisible(true);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarVisible(false);
   };
 
   const handleAddUserPress = () => {
@@ -210,6 +221,7 @@ export default function RevenueScreen() {
         onAddUserPress={handleAddUserPress}
         onGridPress={handleGridPress}
         onAvatarPress={handleAvatarPress}
+        onMorePress={handleMorePress}
       />
 
       <ScrollView
@@ -271,17 +283,19 @@ export default function RevenueScreen() {
             </View>
 
             <View style={styles.legendSection}>
-              <View style={styles.legendItem}>
-                <View
-                  style={[styles.legendDot, { backgroundColor: '#FF8A80' }]}
-                />
-                <Text style={styles.legendText}>Due fee</Text>
-              </View>
-              <View style={styles.legendItem}>
-                <View
-                  style={[styles.legendDot, { backgroundColor: '#64B5F6' }]}
-                />
-                <Text style={styles.legendText}>New student</Text>
+              <View style={styles.legendRow}>
+                <View style={styles.legendItem}>
+                  <View
+                    style={[styles.legendDot, { backgroundColor: '#FF8A80' }]}
+                  />
+                  <Text style={styles.legendText}>Due fee</Text>
+                </View>
+                <View style={styles.legendItem}>
+                  <View
+                    style={[styles.legendDot, { backgroundColor: '#64B5F6' }]}
+                  />
+                  <Text style={styles.legendText}>New student</Text>
+                </View>
               </View>
               <View style={styles.legendItem}>
                 <View
@@ -355,6 +369,13 @@ export default function RevenueScreen() {
           </View>
         </View>
       </ScrollView>
+
+      {/* Sidebar */}
+      <Sidebar
+        isVisible={isSidebarVisible}
+        onClose={handleSidebarClose}
+        currentRoute={pathname}
+      />
     </SafeAreaView>
   );
 }
@@ -460,16 +481,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.border,
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   pieChartSection: {
     marginBottom: 20,
+    alignSelf: 'center',
   },
   pieChart: {
     // Add any specific pie chart styling
   },
   legendSection: {
     gap: 12,
+    width: '100%',
+    alignItems: 'center',
+  },
+  legendRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 12,
+    width: '100%',
+    gap: 40,
   },
   legendItem: {
     flexDirection: 'row',

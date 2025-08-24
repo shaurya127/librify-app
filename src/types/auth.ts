@@ -16,6 +16,7 @@ export interface PhoneInputProps {
 export interface OtpInputProps {
   onVerify: (otp: string) => void;
   onBack: () => void;
+  phoneNumber: string; // Add phone number property
 }
 
 export interface NameInputProps {

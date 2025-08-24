@@ -17,12 +17,6 @@ export default function AuthFlow() {
   const { setCurrentPhone, login, setLoading, setError, isAuthenticated } =
     useAuthStore();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.replace('/(tabs)');
-    }
-  }, [isAuthenticated]);
-
   const handleContinueWithPhone = useCallback(() => {
     const currentPhone = useAuthStore.getState().currentPhone;
     if (currentPhone) {
@@ -92,7 +86,6 @@ export default function AuthFlow() {
       lastName: 'User',
     };
     login(user);
-    router.replace('/(tabs)');
   }, [login]);
 
   return (
@@ -101,7 +94,11 @@ export default function AuthFlow() {
         <LoginScreen onContinueWithPhone={handleContinueWithPhone} />
       )}
       {step === 'otp' && (
-        <OtpScreen onVerify={handleOtpVerify} onBack={handleBackToLogin} />
+        <OtpScreen
+          onVerify={handleOtpVerify}
+          onBack={handleBackToLogin}
+          phoneNumber={useAuthStore.getState().currentPhone}
+        />
       )}
       {step === 'personal-details' && (
         <PersonalDetailsScreen

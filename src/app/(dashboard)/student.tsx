@@ -14,6 +14,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
 import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
+import { usePathname } from 'expo-router';
 
 const { width } = Dimensions.get('window');
 
@@ -36,8 +38,9 @@ export default function StudentScreen() {
   const [selectedStudentType, setSelectedStudentType] = useState('all');
   const [sortBy, setSortBy] = useState('default');
   const [sortOrder, setSortOrder] = useState('ascending');
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const pathname = usePathname();
 
-  // Mock data for students
   const activeStudents: Student[] = [
     {
       id: '1',
@@ -120,14 +123,14 @@ export default function StudentScreen() {
     selectedTab === 'active' ? activeStudents : expiredStudents;
 
   const renderShiftTag = (shift: string) => {
-    let backgroundColor = '#E3F2FD'; // Light cyan for evening shift
+    let backgroundColor = '#E3F2FD';
     let textColor = '#1976D2';
 
     if (shift === 'Morning shift') {
-      backgroundColor = '#FFF8E1'; // Light yellow for morning shift
+      backgroundColor = '#FFF8E1';
       textColor = '#F57C00';
     } else if (shift === 'Evening shift') {
-      backgroundColor = '#E3F2FD'; // Light cyan for evening shift
+      backgroundColor = '#E3F2FD';
       textColor = '#1976D2';
     } else if (shift === 'Floating') {
       backgroundColor = '#F5F5F5';
@@ -407,24 +410,27 @@ export default function StudentScreen() {
     </Modal>
   );
 
+  const handleMorePress = () => {
+    setIsSidebarVisible(true);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarVisible(false);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
 
-      {/* Header */}
-      <Header />
+      <Header onMorePress={handleMorePress} />
 
-      {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Title and Export Button */}
         <View style={styles.titleSection}>
           <Text style={styles.mainTitle}>Student management</Text>
           <TouchableOpacity style={styles.exportButton}>
             <Ionicons name="download" size={20} color="#00A76F" />
           </TouchableOpacity>
         </View>
-
-        {/* Status Tabs */}
         <View style={styles.tabContainer}>
           <TouchableOpacity
             style={[styles.tab, selectedTab === 'active' && styles.activeTab]}
@@ -454,7 +460,6 @@ export default function StudentScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Search and Filter Bar */}
         <View style={styles.searchFilterContainer}>
           <View style={styles.searchContainer}>
             <Ionicons name="search" size={20} color="#666666" />
@@ -475,14 +480,18 @@ export default function StudentScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Student List */}
         <View style={styles.studentList}>
           {currentStudents.map(renderStudentCard)}
         </View>
       </ScrollView>
 
-      {/* Filter Modal */}
       {renderFilterModal()}
+
+      <Sidebar
+        isVisible={isSidebarVisible}
+        onClose={handleSidebarClose}
+        currentRoute={pathname}
+      />
     </SafeAreaView>
   );
 }
@@ -687,7 +696,7 @@ const styles = StyleSheet.create({
     color: '#6B7280',
     fontWeight: '600',
   },
-  // Modal Styles
+
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

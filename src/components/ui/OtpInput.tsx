@@ -5,6 +5,7 @@ import { Colors } from '@/constants/Colors';
 interface OtpInputProps {
   otp: string[];
   otpLength: number;
+  phoneNumber: string;
   handleOtpChange: (value: string, index: number) => void;
   handleKeyPress: (e: any, index: number) => void;
   inputRefs: React.MutableRefObject<(TextInput | null)[]>;
@@ -14,6 +15,7 @@ interface OtpInputProps {
 export const OtpInput: React.FC<OtpInputProps> = ({
   otp,
   otpLength,
+  phoneNumber,
   handleOtpChange,
   handleKeyPress,
   inputRefs,
@@ -23,7 +25,7 @@ export const OtpInput: React.FC<OtpInputProps> = ({
     <View style={styles.container}>
       <Text style={styles.label}>Verify you mobile number</Text>
       <Text style={styles.subText}>
-        We sent a code to +91{otp.join('')}
+        We sent a code to {phoneNumber}
         <Text style={styles.editLink}> Edit</Text>
       </Text>
 

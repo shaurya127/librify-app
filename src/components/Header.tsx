@@ -1,4 +1,9 @@
-import { UserPlus } from 'lucide-react-native';
+import {
+  QrCode,
+  QrCodeIcon,
+  UserPlus,
+  MoreVertical,
+} from 'lucide-react-native';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
@@ -7,6 +12,7 @@ interface HeaderProps {
   onAddUserPress?: () => void;
   onGridPress?: () => void;
   onAvatarPress?: () => void;
+  onMorePress?: () => void;
 }
 
 export default function Header({
@@ -14,18 +20,17 @@ export default function Header({
   onAddUserPress,
   onGridPress,
   onAvatarPress,
+  onMorePress,
 }: HeaderProps) {
   return (
     <View style={styles.header}>
-      {/* Left: Hamburger Menu */}
-      <TouchableOpacity style={styles.menuButton} onPress={onMenuPress}>
+      <TouchableOpacity style={styles.menuButton} onPress={onMorePress}>
         <Image
           source={require('@/assets/images/menu.png')}
           style={styles.iconImage}
         />
       </TouchableOpacity>
 
-      {/* Center: Librify Logo */}
       <View style={styles.logoContainer}>
         <Image
           source={require('@/assets/images/logo.png')}
@@ -34,17 +39,14 @@ export default function Header({
         />
       </View>
 
-      {/* Right: Action Icons */}
       <View style={styles.headerActions}>
         <TouchableOpacity style={styles.headerIcon} onPress={onAddUserPress}>
           <UserPlus size={24} color="#000000" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.headerIcon} onPress={onGridPress}>
-          <Image
-            source={require('@/assets/images/QR.png')}
-            style={styles.iconImage}
-          />
+          <QrCodeIcon size={24} color="#000000" />
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.userAvatar} onPress={onAvatarPress}>
           <Text style={styles.userAvatarText}>L</Text>
         </TouchableOpacity>
@@ -83,6 +85,13 @@ const styles = StyleSheet.create({
   },
   headerIcon: {
     marginHorizontal: 8,
+  },
+  headerIcon2: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 8,
+    padding: 4,
+    marginRight: 4,
   },
   iconImage: {
     height: 24,

@@ -21,7 +21,7 @@ export default function OnboardingFinalScreen({
 }: OnboardingFinalProps) {
   const handleGoToDashboard = () => {
     if (navigation) {
-      navigation.navigate('dashboard-home');
+      navigation.navigate('home');
     } else {
       onComplete();
     }
@@ -64,7 +64,6 @@ export default function OnboardingFinalScreen({
 
           <View style={styles.separator} />
 
-          {/* Dashboard CTA Section */}
           <View style={styles.dashboardSection}>
             <Text style={styles.dashboardText}>
               Ready to explore your library management system?

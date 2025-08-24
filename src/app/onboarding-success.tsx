@@ -19,7 +19,7 @@ export default function OnboardingSuccessScreen({
   useEffect(() => {
     const timer = setTimeout(() => {
       onContinue();
-    }, 10000); // 10 seconds
+    }, 3000); // 10 seconds
 
     // Cleanup timer if component unmounts
     return () => clearTimeout(timer);

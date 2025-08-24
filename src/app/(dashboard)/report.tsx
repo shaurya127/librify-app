@@ -14,6 +14,8 @@ import {
 import { ChevronUp, ChevronDown } from 'lucide-react-native';
 import { Colors } from '@/constants/Colors';
 import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
+import { usePathname } from 'expo-router';
 
 interface Student {
   id: string;
@@ -45,7 +47,6 @@ interface ReportItem {
   };
 }
 
-// Mock data
 const mockTodayActions: ReportItem[] = [
   {
     id: '2',
@@ -188,6 +189,8 @@ export default function ReportScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const pathname = usePathname();
 
   const toggleExpanded = (itemId: string) => {
     setExpandedItems((prev) =>
@@ -232,6 +235,14 @@ export default function ReportScreen() {
     }
   };
 
+  const handleMorePress = () => {
+    setIsSidebarVisible(true);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarVisible(false);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
@@ -241,10 +252,10 @@ export default function ReportScreen() {
         onAddUserPress={() => Alert.alert('Add User', 'Add user pressed')}
         onGridPress={() => Alert.alert('Grid', 'Grid pressed')}
         onAvatarPress={() => Alert.alert('Profile', 'Profile pressed')}
+        onMorePress={handleMorePress}
       />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Title and Download Button */}
         <View style={styles.titleRow}>
           <Text style={styles.title}>Library report</Text>
           <TouchableOpacity
@@ -255,7 +266,6 @@ export default function ReportScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Tabs */}
         <View style={styles.tabsContainer}>
           <TouchableOpacity
             style={[styles.tab, activeTab === 'today' && styles.activeTab]}
@@ -290,8 +300,6 @@ export default function ReportScreen() {
             <Text style={styles.filterText}>⚙ Filter</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Search */}
         <View style={styles.searchContainer}>
           <Text style={styles.searchIcon}>🔍</Text>
           <TextInput
@@ -304,11 +312,8 @@ export default function ReportScreen() {
         </View>
 
         {activeTab === 'today' ? (
-          /* Today's Action Tab */
           <View style={styles.todayContent}>
             <Text style={styles.sectionTitle}>Action items - 21 Jan, 2025</Text>
-
-            {/* Subscription Ends */}
             <View style={styles.section}>
               <Text style={styles.subsectionTitle}>
                 Subscription ends today (2)
@@ -352,7 +357,6 @@ export default function ReportScreen() {
                 ))}
             </View>
 
-            {/* Payment Due */}
             <View style={styles.section}>
               <Text style={styles.subsectionTitle}>Payment due (3)</Text>
               {mockTodayActions
@@ -397,9 +401,7 @@ export default function ReportScreen() {
             </View>
           </View>
         ) : (
-          /* Daily Report Tab */
           <View style={styles.dailyContent}>
-            {/* Summary Cards */}
             <View style={styles.summaryContainer}>
               <View style={styles.summaryCard}>
                 <Text style={styles.summaryLabel}>Summary</Text>
@@ -433,7 +435,6 @@ export default function ReportScreen() {
               </View>
             </View>
 
-            {/* Report Items */}
             <Text style={styles.reportTitle}>Report - 25 June 2025 🔄</Text>
 
             {mockDailyReport.map((item) => (
@@ -530,7 +531,6 @@ export default function ReportScreen() {
         )}
       </ScrollView>
 
-      {/* Filter Modal */}
       <Modal
         visible={showFilterModal}
         transparent
@@ -601,6 +601,12 @@ export default function ReportScreen() {
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
+
+      <Sidebar
+        isVisible={isSidebarVisible}
+        onClose={handleSidebarClose}
+        currentRoute={pathname}
+      />
     </SafeAreaView>
   );
 }
