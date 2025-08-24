@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'Expo Starter App'
+rootProject.name = 'Librify'
 
 dependencyResolutionManagement {
   versionCatalogs {

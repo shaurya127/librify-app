@@ -1,3 +1,4 @@
+import { UserPlus } from 'lucide-react-native';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
@@ -36,10 +37,7 @@ export default function Header({
       {/* Right: Action Icons */}
       <View style={styles.headerActions}>
         <TouchableOpacity style={styles.headerIcon} onPress={onAddUserPress}>
-          <Image
-            source={require('@/assets/images/profile.png')}
-            style={styles.iconImage}
-          />
+          <UserPlus size={24} color="#000000" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.headerIcon} onPress={onGridPress}>
           <Image
